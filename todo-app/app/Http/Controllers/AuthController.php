@@ -56,4 +56,14 @@ class AuthController extends Controller
         // return redirect()->intended(route('todo'));
         return  "success";
     }
+    public function logout(Request $request)
+    {
+        Auth::logout(); // Log out the user
+
+        $request->session()->invalidate(); // Invalidate the session
+
+        $request->session()->regenerateToken(); // Regenerate the CSRF token
+
+        return redirect('/login'); // Redirect to the login page
+    }
 }

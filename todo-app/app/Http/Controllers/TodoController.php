@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\TodoModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class TodoController extends Controller
 {
     public function index()
     {
-        $todos = TodoModel::all(); // Fetch all todos
-        return view('todo.todo', compact('todos')); // Pass todos to the view
+        $user = Auth::user();
+        $todos = TodoModel::where('user_id', $user->id)->get();
+        return view('todo.todo', [
+            'todos' => $todos,
+            'username' => $user->name
+        ]); // Pass todos to the view
 
     }
 
@@ -27,6 +33,7 @@ class TodoController extends Controller
             'todo_title' => $request->todo_title,
             'todo_description' => $request->todo_description,
             'todo_status' => 1,
+            'user_id' => Auth::id(),
         ]);
 
         return "success"; // just returned or refreshed the page

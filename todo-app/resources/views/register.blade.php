@@ -32,7 +32,7 @@
                         <input type="password" class="form-control" id="password-confirm" name="password_confirmation" required>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Register</button>
-                    <div class="d-flex justify-content-end mt-3 "> <i>back to </i> <span class="fs-2 font-weight-bold mx-3"><a href="/"> Login </a></span>
+                    <div class="d-flex justify-content-end mt-3 "> <i>back to </i> <span class="fs-2 font-weight-bold mx-3"><a href="/login"> Login </a></span>
                     </div>
                 </form>
             </div>
@@ -66,7 +66,7 @@
                     .then(function(response) {
                         // console.log("success")
                         if (confirm("Account Created try to login")) {
-                            console.log("nice");
+                            window.location.href = '/login'; // Redirect to the /todo route
                         }
                     })
                     .catch(function(error) {

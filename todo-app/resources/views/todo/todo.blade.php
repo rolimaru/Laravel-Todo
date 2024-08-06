@@ -8,6 +8,8 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
@@ -58,7 +60,25 @@
 </head>
 
 <body>
-    <div class="container centered-form">
+    <div class="head d-flex justify-content-end">
+
+        <div class="mx-5 ">
+            <div style="font-size: 50px ">
+                <i class="bi bi-person-circle"></i>
+                {{ $username}}
+
+            </div>
+            <div class="d-flex justify-content-end">
+                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit">Logout</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container  ">
         <div class="form-container">
             <h4 id="form-title">Add new Todo</h4>
             <form id="todo-form">
@@ -74,7 +94,9 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Submit Todo</button>
             </form>
+
         </div>
+
     </div>
 
     <div class=" row mx-3">
