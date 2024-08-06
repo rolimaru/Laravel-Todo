@@ -26,6 +26,7 @@ class TodoController extends Controller
         TodoModel::create([
             'todo_title' => $request->todo_title,
             'todo_description' => $request->todo_description,
+            'todo_status' => 1,
         ]);
 
         return "success"; // just returned or refreshed the page
@@ -54,12 +55,29 @@ class TodoController extends Controller
         return "success"; // just returned or refreshed the page
 
     }
+    public function markAsDone(int $id, Request $request)
+    {
+        TodoModel::findorFail($id)->update(
+            [
+                'todo_status' => 0,
+            ]
+        );
+    }
+    public function markAsTodo(int $id, Request $request)
+    {
+        TodoModel::findorFail($id)->update(
+            [
+                'todo_status' => 1,
+            ]
+        );
+    }
     //delete
     public function destroy(int $id)
     {
         $todo = TodoModel::findOrfail($id);
         $todo->delete();
 
-        return redirect()->back()->with('status', "Todo is deleted");
+        // return redirect()->back()->with('status', "Todo is deleted");
+        return response()->json(['success' => true]);
     }
 }

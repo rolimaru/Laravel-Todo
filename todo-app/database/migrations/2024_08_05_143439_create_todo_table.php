@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('todo_title');
             $table->string('todo_description');
+            $table->integer('todo_status')->default(1); // Default value of 1
             $table->timestamps();
         });
     }
