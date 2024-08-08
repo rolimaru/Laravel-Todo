@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 use function Laravel\Prompts\password;
 
@@ -28,8 +29,14 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
+            $user = Auth::user();
 
-            return response()->json(['success' => true]); // Return success response
+            if ($user->role == 'admin') {
+                // return redirect('/admin');
+                return response()->json(['role' => 'admin']); // Return success response
+
+            }
+            return response()->json(['role' => 'user']); // Return success response
         }
 
         return redirect()->back()->withErrors(['error' => 'Invalid credentials']);
@@ -47,6 +54,7 @@ class AuthController extends Controller
         $data['name'] = $request->username;
         $data['email'] = $request->email;
         $data['password'] = $request->password;
+        $data['role'] = 'user';
 
         $user = User::create($data);
 

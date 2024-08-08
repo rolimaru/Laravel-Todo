@@ -22,6 +22,8 @@ Route::middleware('auth')->group(
             return view('welcome', ['userName' => $userName]);
         });
 
+        Route::get('/admin', [App\Http\Controllers\UserController::class, 'admin'])->name('admin');
+
         Route::get('/todo', [App\Http\Controllers\TodoController::class, 'index'])->name('todo');
         Route::post('/add', [App\Http\Controllers\TodoController::class, 'create']);
         Route::get('/show/{id}', [App\Http\Controllers\TodoController::class, 'showById']);

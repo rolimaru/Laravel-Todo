@@ -55,8 +55,14 @@
                     password: password,
                 })
                 .then(function(response) {
-                    if (response.data.success) {
-                        window.location.href = '/todo'; // Redirect to the /todo route
+                    // console.log("data: ", response.data);
+                    if (response.data.role) {
+                        if (response.data.role == 'user') {
+                            window.location.href = '/todo'; // Redirect to the /todo route
+                        } else {
+                            window.location.href = '/admin'; // Redirect to the /todo route
+
+                        }
                     } else {
                         alert('Login failed.');
                     }
